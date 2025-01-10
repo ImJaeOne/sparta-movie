@@ -22,3 +22,19 @@ export const getMovieList = async () => {
         console.error('Error:', error);
     }
 };
+
+export const getMovieName = async (movieName) => {
+    try {
+        const res = await fetch(
+            `https://api.themoviedb.org/3/search/movie?query=${movieName}&include_adult=false&language=ko`,
+            access
+        );
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        const data = await res.json();
+        return data.results;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
