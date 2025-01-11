@@ -1,5 +1,5 @@
-import { movieListUI } from './ui.js';
-import { getMovieList, getMovieName } from './api.js';
+import { movieListUI, movieDetailUI } from './ui.js';
+import { getMovieList, getMovieName, getMovieDetail } from './api.js';
 
 const movieListContainer = document.getElementById('movie-list');
 
@@ -32,6 +32,25 @@ const debounce = (func, delay) => {
         timer = setTimeout(() => func(...args), delay);
     };
 };
+
+const modal = document.getElementsByClassName('modal')[0];
+const modalContent = document.getElementsByClassName('modal-content-container')[0];
+
+const toggleModal = () => modal.classList.toggle('hidden');
+
+movieListContainer.addEventListener('click', async (e) => {
+    const movieItem = e.target.closest('.movie-item');
+    const movieId = movieItem.getAttribute('movie-id');
+    const detailData = await getMovieDetail(movieId);
+    modalContent.innerHTML = movieDetailUI(detailData);
+    toggleModal();
+});
+
+modal.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal-background') || e.target.classList.contains('modal-close-btn')) {
+        toggleModal();
+    }
+})
 
 searchInput.addEventListener('input', debounce(handleSearch, 300));
 
