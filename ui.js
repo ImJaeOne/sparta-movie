@@ -9,3 +9,19 @@ export const movieListUI = (data) => {
     </div>
 `;
 };
+
+export const movieDetailUI = (data) => {
+    return `
+        <div class="modal-header">
+            <div class="modal-bookmark-btn">☆</div>
+            <div class="modal-close-btn">x</div>
+        </div>
+        <div class="modal-item" movie-id="${data.id}">
+            <img class="modal-image" src='https://image.tmdb.org/t/p/original${data.poster_path}' alt="이미지 없음"></img>
+            <div class="modal-title">${data.title}</div>
+            <div class="modal-content">${data.overview}</div>
+            <div class="modal-date">개봉일: ${data.release_date}</div>
+            <div class="modal-rate">평점: ${data.vote_average}</div>
+        </div>
+    `;
+}
