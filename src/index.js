@@ -54,7 +54,14 @@ searchInput.addEventListener(
     }, 300)
 );
 
-const toggleModal = () => modal.classList.toggle('hidden');
+const toggleModal = () => {
+    modal.classList.toggle('hidden');
+    if (modal.classList.contains('hidden')) {
+        document.body.style.overflow = '';
+    } else {
+        document.body.style.overflow = 'hidden';
+    }
+};
 
 movieListContainer.addEventListener('click', async (e) => {
     const movieItem = e.target.closest('.movie-item');
@@ -77,16 +84,14 @@ const deleteBookmark = (movieId) => {
     removeLocalStorage(movieId);
 };
 
-modalContent.addEventListener('click', async (e) => {
-    const modalItem = e.target.closest('.modal-item');
-    if (!modalItem) return;
-
-    const movieId = modalItem.getAttribute('movie-id');
-
+modal.addEventListener('click', async (e) => {
     if (e.target.classList.contains('modal-background') || e.target.classList.contains('modal-close-btn')) {
         toggleModal();
         return;
     }
+
+    const modalItem = e.target.closest('.modal-item');
+    const movieId = modalItem.getAttribute('movie-id');
 
     if (e.target.classList.contains('modal-bookmark-btn')) {
         const isBookmarked = e.target.classList.contains('bookmark-true');
