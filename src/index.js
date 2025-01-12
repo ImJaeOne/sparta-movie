@@ -13,10 +13,10 @@ let bookmarkView = false;
 const renderMovieList = async (search = '') => {
     let listData;
 
-    if (bookmarkView) {
-        listData = Object.values(getAllLocalStorage());
-    } else if (search) {
+    if (search) {
         listData = await getMovieName(search);
+    } else if (bookmarkView) {
+        listData = Object.values(getAllLocalStorage());
     } else {
         listData = await getMovieList();
     }
@@ -50,7 +50,6 @@ searchInput.addEventListener(
     'input',
     debounce((e) => {
         const search = e.target.value.trim();
-        bookmarkView = false;
         renderMovieList(search);
     }, 300)
 );
