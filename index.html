@@ -11,11 +11,17 @@
 
 <body>
     <header id="header">
-        <h1 id="title">영화 검색</h1>
-        <input id='movie-search' type="text" placeholder="영화를 검색하세요...">
-        <div id="bookmark">북마크</div>
+        <nav id="nav">
+            <div id="title">ONEFLIX</div>
+            <div class="nav-container">
+                <input id='movie-search' type="text" placeholder="영화를 검색하세요..." autocomplete="off">
+                <div id="bookmark">북마크</div>
+            </div>
+        </nav>
+        
     </header>
     <main id="main">
+        <div class="main-header"></div>
         <div id="movie-list"></div>
     </main>
     <div class="modal hidden">
