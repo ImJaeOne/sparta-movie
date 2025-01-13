@@ -3,6 +3,7 @@ import { getMovieList, getMovieName, getMovieDetail } from './api.js';
 import { setLocalStorage, getLocalStorage, getAllLocalStorage, removeLocalStorage } from './storage.js';
 
 const movieListContainer = document.getElementById('movie-list');
+const mainHeader = document.getElementsByClassName('main-header')[0];
 const bookmarkBtn = document.getElementById('bookmark');
 const searchInput = document.getElementById('movie-search');
 const modal = document.getElementsByClassName('modal')[0];
@@ -14,15 +15,16 @@ const renderMovieList = async (search = '') => {
     let listData;
 
     if (search) {
+        mainHeader.textContent = `'${search}' 검색 결과`;
         listData = await getMovieName(search);
     } else if (bookmarkView) {
+        mainHeader.textContent = '내 북마크';
         listData = Object.values(getAllLocalStorage());
     } else {
+        mainHeader.textContent = 'TOP 20 인기 영화';
         listData = await getMovieList();
     }
-
     movieListContainer.innerHTML = '';
-
     listData.forEach((data) => {
         movieListContainer.innerHTML += movieListUI(data);
     });
