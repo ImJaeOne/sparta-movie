@@ -40,14 +40,6 @@ bookmarkBtn.addEventListener('click', () => {
     renderMovieList();
 });
 
-const debounce = (func, delay) => {
-    let timer = null;
-    return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => func(...args), delay);
-    };
-};
-
 searchInput.addEventListener(
     'input',
     debounce((e) => {
@@ -80,10 +72,12 @@ movieListContainer.addEventListener('click', async (e) => {
 
 const addBookmark = (movieId, data) => {
     setLocalStorage(movieId, data);
+    swal('북마크 추가 ', '', 'success');
 };
 
 const deleteBookmark = (movieId) => {
     removeLocalStorage(movieId);
+    swal('북마크 삭제 ', '', 'success');
 };
 
 modal.addEventListener('click', async (e) => {
@@ -118,3 +112,12 @@ modal.addEventListener('click', async (e) => {
 });
 
 renderMovieList();
+
+
+function debounce(func, delay){
+    let timer = null;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => func(...args), delay);
+    };
+};
