@@ -5,6 +5,7 @@ import { setLocalStorage, getLocalStorage, getAllLocalStorage, removeLocalStorag
 const movieListContainer = document.getElementById('movie-list');
 const mainHeader = document.getElementsByClassName('main-header')[0];
 const bookmarkBtn = document.getElementById('bookmark');
+const searchOption = document.getElementById('search-type');
 const searchInput = document.getElementById('movie-search');
 const modal = document.getElementsByClassName('modal')[0];
 const modalContent = document.getElementsByClassName('modal-content-container')[0];
@@ -40,13 +41,40 @@ bookmarkBtn.addEventListener('click', () => {
     renderMovieList();
 });
 
-searchInput.addEventListener(
-    'input',
-    debounce((e) => {
+
+const searchDebouncing = debounce((e) => {
+    const search = e.target.value.trim();
+    renderMovieList(search);
+}, 300);
+
+const searchNormal = (e) => {
+    if (e.key === 'Enter') {
         const search = e.target.value.trim();
         renderMovieList(search);
-    }, 300)
-);
+    }
+};
+
+let currentSearchHandler = 'debounce';
+searchInput.addEventListener('input', searchDebouncing);
+
+searchOption.addEventListener('change', (e) => {
+    const selectedOption = e.target.value;
+
+    if (currentSearchHandler === 'debounce') {
+        searchInput.removeEventListener('input', searchDebouncing);
+    } else if (currentSearchHandler === 'normal') {
+        searchInput.removeEventListener('keyup', searchNormal);
+    }
+
+    if (selectedOption === 'search-normal') {
+        currentSearchHandler = 'normal';
+        searchInput.addEventListener('keyup', searchNormal);
+    } else {
+        currentSearchHandler = 'debounce';
+        searchInput.addEventListener('input', searchDebouncing);
+    }
+});
+
 
 const toggleModal = () => {
     modal.classList.toggle('hidden');

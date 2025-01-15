@@ -1,13 +1,18 @@
 export const movieListUI = (data) => {
+    const max = 10;
+    const starPercentage = (data.vote_average / max) * 100;
+
     return `
     <div class="movie-item" movie-id="${data.id}">
         <img class="movie-image" src='https://image.tmdb.org/t/p/original${data.poster_path}' alt="이미지 없음"></img>
         <div>
             <div class="movie-title">${data.title}</div>
-            <div class="movie-rate">평점: ${data.vote_average}</div>
+            <div class="movie-rate">
+                    <div class="stars" style="width: ${starPercentage}%"></div>
+            </div>
         </div>
     </div>
-`;
+    `;
 };
 
 export const movieDetailUI = (data, bookmark) => {
