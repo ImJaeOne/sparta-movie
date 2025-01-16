@@ -4,8 +4,8 @@ export const movieListUI = (data) => {
 
     return `
     <div class="movie-item" movie-id="${data.id}">
-        <img class="movie-image" src='https://image.tmdb.org/t/p/original${data.poster_path}' alt="이미지 없음"></img>
-        <div>
+        <img class="movie-image" src='https://image.tmdb.org/t/p/original${data.poster_path}'></img>
+        <div class="movie-info">
             <div class="movie-title">${data.title}</div>
             <div class="movie-rate">
                     <div class="stars" style="width: ${starPercentage}%"></div>
@@ -24,7 +24,7 @@ export const movieDetailUI = (data, bookmark) => {
             </div>
             <img class="modal-image" src='https://image.tmdb.org/t/p/original${
                 data.poster_path
-            }' alt="이미지 없음"></img>
+            }'></img>
             <div class="modal-title">${data.title}</div>
             <div class="modal-content">${data.overview}</div>
             <div class="modal-date">개봉일: ${data.release_date}</div>

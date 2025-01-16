@@ -63,7 +63,12 @@
 .modal-image {
     width: 100%;
     height: auto;
+    min-height: 500px;
     border-radius: 10px;
+    background-color: #f0f0f0;
+    background-image: url('../assets/placeholder.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .modal-title {
