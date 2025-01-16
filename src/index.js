@@ -63,10 +63,8 @@ searchOption.addEventListener('change', (e) => {
     searchInput.removeEventListener('keyup', searchNormal);
 
     if (selectedOption === 'search-normal') {
-        console.log('normal');
         searchInput.addEventListener('keyup', searchNormal);
     } else {
-        console.log('debounce');
         searchInput.addEventListener('input', searchDebouncing);
     }
 });
