@@ -1,6 +1,7 @@
 import { movieListUI, movieDetailUI } from './ui.js';
 import { getMovieList, getMovieName, getMovieDetail } from './api.js';
 import { setLocalStorage, getLocalStorage, getAllLocalStorage, removeLocalStorage } from './storage.js';
+import { debounce } from './util.js';
 
 const movieListContainer = document.getElementById('movie-list');
 const mainHeader = document.getElementsByClassName('main-header')[0];
@@ -41,7 +42,6 @@ bookmarkBtn.addEventListener('click', () => {
     renderMovieList();
 });
 
-
 const searchDebouncing = debounce((e) => {
     const search = e.target.value.trim();
     renderMovieList(search);
@@ -54,27 +54,22 @@ const searchNormal = (e) => {
     }
 };
 
-let currentSearchHandler = 'debounce';
 searchInput.addEventListener('input', searchDebouncing);
 
 searchOption.addEventListener('change', (e) => {
     const selectedOption = e.target.value;
 
-    if (currentSearchHandler === 'debounce') {
-        searchInput.removeEventListener('input', searchDebouncing);
-    } else if (currentSearchHandler === 'normal') {
-        searchInput.removeEventListener('keyup', searchNormal);
-    }
+    searchInput.removeEventListener('input', searchDebouncing);
+    searchInput.removeEventListener('keyup', searchNormal);
 
     if (selectedOption === 'search-normal') {
-        currentSearchHandler = 'normal';
+        console.log('normal');
         searchInput.addEventListener('keyup', searchNormal);
     } else {
-        currentSearchHandler = 'debounce';
+        console.log('debounce');
         searchInput.addEventListener('input', searchDebouncing);
     }
 });
-
 
 const toggleModal = () => {
     modal.classList.toggle('hidden');
@@ -140,12 +135,3 @@ modal.addEventListener('click', async (e) => {
 });
 
 renderMovieList();
-
-
-function debounce(func, delay){
-    let timer = null;
-    return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => func(...args), delay);
-    };
-};
