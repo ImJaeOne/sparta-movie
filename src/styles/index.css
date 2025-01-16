@@ -1,13 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
-* {
+body {
     margin: 0;
     font-family: 'Noto Sans Kr', serif;
     font-style: normal;
-}
-
-body {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,15 +29,15 @@ body {
     align-items: center;
 }
 
-#title{
+#title {
     padding: 10px;
     font-family: 'Impact', sans-serif;
     font-size: 80px;
-    color: #E50914;
+    color: #e50914;
     font-weight: bold;
 }
 
-.nav-container{
+.nav-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,12 +67,12 @@ body {
     flex: 4;
 }
 
-#bookmark {
+#toggle-view-btn {
     cursor: pointer;
     background-color: red;
     border-radius: 5px;
     padding: 10px;
-    font-family:sans-serif;
+    font-family: sans-serif;
     font-size: 13px;
 }
 
@@ -88,7 +84,7 @@ body {
     justify-content: center;
 }
 
-.main-header{
+.main-header {
     margin-left: 40px;
     color: white;
     font-size: 30px;
@@ -98,9 +94,9 @@ body {
 
 #movie-list {
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 16px; 
+    gap: 16px;
     padding: 16px;
 }
 
@@ -115,14 +111,23 @@ body {
 }
 
 .movie-item:hover {
-    transform: translateY(-5px); 
+    transform: translateY(-5px);
     box-shadow: 4px 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .movie-image {
-    width: 100%; 
+    width: 100%;
     height: 385px;
-    object-fit: cover; 
+    object-fit: cover;
+    background-color: #f0f0f0; 
+    background-image: url('../assets/placeholder.png'); 
+    background-size: cover;
+    background-position: center;
+}
+
+.movie-info {
+    display: grid;
+    grid-template-rows: 1.5fr 1fr;
 }
 
 .movie-title {
@@ -137,107 +142,17 @@ body {
     align-items: center;
     width: 150px;
     height: 30px;
-    margin: 8px auto; 
-    overflow: hidden; 
+    margin: 8px auto;
+    overflow: hidden;
     position: relative;
 }
 
 .stars {
-    height: 100%; 
-    background: url('fill-star.png') repeat-x; 
+    height: 100%;
+    background: url('../assets/fill-star.png') repeat-x;
     background-size: 30px;
     position: absolute;
     top: 0;
     left: 0;
-    width: 0; 
-}
-
-
-.hidden {
-    display: none;
-}
-
-.modal-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* 반투명 배경 */
-    z-index: 100;
-}
-
-.modal-content-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 101;
-    width: 600px;
-    max-height: 80vh; 
-    overflow-y: auto; 
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-}
-
-.modal-header{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-.modal-bookmark-btn{
-    position: relative;
-    top: 3px;
-    font-size: 30px;
-    cursor: pointer;
-}
-
-.modal-close-btn {
-    font-size: 30px;
-    color: rgb(114, 114, 114);
-    cursor: pointer;
-}
-
-.modal-close-btn:hover {
-    color: black;
-}
-
-.modal-item {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-}
-
-.modal-image {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-.modal-title {
-    font-size: 30px;
-    font-weight: bold;
-    margin-top: 15px;
-}
-
-.modal-content {
-    font-size: 20px;
-    margin-top: 10px;
-    line-height: 1.5;
-    color: #555;
-    overflow-wrap: break-word;
-}
-
-.modal-date,
-.modal-rate {
-    margin-top: 10px;
-    font-size: 18px;
-    color: #777;
+    width: 0;
 }

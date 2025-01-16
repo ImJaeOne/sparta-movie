@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Oneflix</title>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script type="module" src="./src/index.js"></script>
+        <link rel="stylesheet" href="./src/styles/index.css" />
+        <link rel="stylesheet" href="./src/styles/modal.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oneflix</title>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script type="module" src="./src/index.js"></script>
-    <link rel="stylesheet" href="./index.css">
-</head>
-
-<body>
-    <header id="header">
-        <nav id="nav">
-            <div id="title">ONEFLIX</div>
-            <div class="nav-container">
-                <div class="search-container">
-                    <select id="search-type">
-                        <option value="search-debouncing">디바운싱</option>
-                        <option value="search-normal">일반검색</option>
-                    </select>
-                    <input id="movie-search" type="text" placeholder="영화를 검색하세요..." autocomplete="off">
+    <body>
+        <header id="header">
+            <nav id="nav">
+                <div id="title">ONEFLIX</div>
+                <div class="nav-container">
+                    <div class="search-container">
+                        <select id="search-type">
+                            <option value="search-debouncing">디바운싱</option>
+                            <option value="search-normal">일반검색</option>
+                        </select>
+                        <input id="movie-search" type="text" placeholder="영화를 검색하세요..." autocomplete="off" />
+                    </div>
+                    <div id="toggle-view-btn">북마크</div>
                 </div>
-                <div id="bookmark">북마크</div>
-            </div>
-        </nav>
-    </header>
-    <main id="main">
-        <div class="main-header"></div>
-        <div id="movie-list"></div>
-    </main>
-    <div class="modal hidden">
-        <div class="modal-background"></div>
-        <div class="modal-content-container"></div>
-    </div>
-</body>
-
+            </nav>
+        </header>
+        <main id="main">
+            <div class="main-header"></div>
+            <div id="movie-list"></div>
+        </main>
+        <div class="modal hidden">
+            <div class="modal-background"></div>
+            <div class="modal-content-container"></div>
+        </div>
+    </body>
 </html>

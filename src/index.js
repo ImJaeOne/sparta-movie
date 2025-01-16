@@ -1,10 +1,11 @@
-import { movieListUI, movieDetailUI } from './ui.js';
-import { getMovieList, getMovieName, getMovieDetail } from './api.js';
-import { setLocalStorage, getLocalStorage, getAllLocalStorage, removeLocalStorage } from './storage.js';
+import { movieListUI, movieDetailUI } from './services/ui.js';
+import { getMovieList, getMovieName, getMovieDetail } from './services/api.js';
+import { setLocalStorage, getLocalStorage, getAllLocalStorage, removeLocalStorage } from './services/storage.js';
+import { debounce } from './utils/debounce.js';
 
 const movieListContainer = document.getElementById('movie-list');
 const mainHeader = document.getElementsByClassName('main-header')[0];
-const bookmarkBtn = document.getElementById('bookmark');
+const toggleViewBtn = document.getElementById('toggle-view-btn');
 const searchOption = document.getElementById('search-type');
 const searchInput = document.getElementById('movie-search');
 const modal = document.getElementsByClassName('modal')[0];
@@ -31,16 +32,15 @@ const renderMovieList = async (search = '') => {
     });
 };
 
-bookmarkBtn.addEventListener('click', () => {
+toggleViewBtn.addEventListener('click', () => {
     bookmarkView = !bookmarkView;
     if (bookmarkView) {
-        bookmarkBtn.textContent = '홈으로 이동하기';
+        toggleViewBtn.textContent = '홈으로 이동하기';
     } else {
-        bookmarkBtn.textContent = '북마크';
+        toggleViewBtn.textContent = '북마크';
     }
     renderMovieList();
 });
-
 
 const searchDebouncing = debounce((e) => {
     const search = e.target.value.trim();
@@ -54,27 +54,22 @@ const searchNormal = (e) => {
     }
 };
 
-let currentSearchHandler = 'debounce';
 searchInput.addEventListener('input', searchDebouncing);
 
 searchOption.addEventListener('change', (e) => {
     const selectedOption = e.target.value;
 
-    if (currentSearchHandler === 'debounce') {
-        searchInput.removeEventListener('input', searchDebouncing);
-    } else if (currentSearchHandler === 'normal') {
-        searchInput.removeEventListener('keyup', searchNormal);
-    }
+    searchInput.removeEventListener('input', searchDebouncing);
+    searchInput.removeEventListener('keyup', searchNormal);
 
     if (selectedOption === 'search-normal') {
-        currentSearchHandler = 'normal';
+        console.log('normal');
         searchInput.addEventListener('keyup', searchNormal);
     } else {
-        currentSearchHandler = 'debounce';
+        console.log('debounce');
         searchInput.addEventListener('input', searchDebouncing);
     }
 });
-
 
 const toggleModal = () => {
     modal.classList.toggle('hidden');
@@ -140,12 +135,3 @@ modal.addEventListener('click', async (e) => {
 });
 
 renderMovieList();
-
-
-function debounce(func, delay){
-    let timer = null;
-    return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => func(...args), delay);
-    };
-};
