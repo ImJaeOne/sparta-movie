@@ -5,7 +5,7 @@ import { debounce } from './util.js';
 
 const movieListContainer = document.getElementById('movie-list');
 const mainHeader = document.getElementsByClassName('main-header')[0];
-const bookmarkBtn = document.getElementById('bookmark');
+const toggleViewBtn = document.getElementById('toggle-view-btn');
 const searchOption = document.getElementById('search-type');
 const searchInput = document.getElementById('movie-search');
 const modal = document.getElementsByClassName('modal')[0];
@@ -32,12 +32,12 @@ const renderMovieList = async (search = '') => {
     });
 };
 
-bookmarkBtn.addEventListener('click', () => {
+toggleViewBtn.addEventListener('click', () => {
     bookmarkView = !bookmarkView;
     if (bookmarkView) {
-        bookmarkBtn.textContent = '홈으로 이동하기';
+        toggleViewBtn.textContent = '홈으로 이동하기';
     } else {
-        bookmarkBtn.textContent = '북마크';
+        toggleViewBtn.textContent = '북마크';
     }
     renderMovieList();
 });
