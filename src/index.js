@@ -1,7 +1,7 @@
-import { movieListUI, movieDetailUI } from './ui.js';
-import { getMovieList, getMovieName, getMovieDetail } from './api.js';
-import { setLocalStorage, getLocalStorage, getAllLocalStorage, removeLocalStorage } from './storage.js';
-import { debounce } from './util.js';
+import { movieListUI, movieDetailUI } from './services/ui.js';
+import { getMovieList, getMovieName, getMovieDetail } from './services/api.js';
+import { setLocalStorage, getLocalStorage, getAllLocalStorage, removeLocalStorage } from './services/storage.js';
+import { debounce } from './utils/debounce.js';
 
 const movieListContainer = document.getElementById('movie-list');
 const mainHeader = document.getElementsByClassName('main-header')[0];
